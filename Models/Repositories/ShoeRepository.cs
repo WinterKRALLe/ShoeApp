@@ -10,7 +10,6 @@ public class ShoeRepository : IShoeRepository
     }
     public List<Shoe> FindAll()
     {
-        // vyhledání všech filmů, je třeba explicitně načíst relaci Genre, jinak bude null
         return _dbContext.Shoes.ToList();
     }
     public Shoe? FindById(int id)
