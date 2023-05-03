@@ -26,7 +26,6 @@ public class ShoeController : Controller
     {
         return View("ShoeForm");
     }
-    // Metoda pro editaci filmu, má jako argument id filmu, který cheme editovat
     public IActionResult Edit(int id)
     {
         // potřebujeme předvyplnit data do formuláře, tudíž si jej potřebujeme vyhledat
@@ -35,7 +34,6 @@ public class ShoeController : Controller
 
         return View("ShoeForm");
     }
-    // Metoda pro zpracování formuláře pro přidání filmu
     public IActionResult AddShoes()
     {
         // získání dat z formuláře
