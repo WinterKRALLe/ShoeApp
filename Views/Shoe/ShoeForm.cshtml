@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Přidat botu";
+    var shoe = ViewData.ContainsKey("Shoe") ? ViewData["Shoe"] as Shoe : null;
+}
+
+<h1 class="cerveny-text">
+    @(shoe == null ? "Přidat botu" : "Editovat botu")
+</h1>
+
+<h1>
+    @shoe?.Id
+</h1>
+
+@* 
+
+Šablona pro editaci a vytváření bot - prvky jsou stejné, tudíž je možno použít pro obě akce,
+vyhneme se tak redundanci. Pro správnou syntaxi: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0
+
+ *@
+
+<div class="row">
+    <div class="col">
+        <form asp-controller="Shoe" asp-action="@(shoe == null ? "AddShoes" : "EditShoes")" method="post" enctype="multipart/form-data">
+            <div class="mb-3 mt-3">
+                <label for="name" class="form-label">Název bot</label>
+                <input type="text" class="form-control" id="name" placeholder="Vložte název" name="brand"
+                       @if (shoe != null)
+                       {
+                           <text> value="@shoe.Brand" </text>
+                       } />
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Pic</label>
+                <input type="file" class="form-control" name="image" id="image"/>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="model" class="form-label">Model bot</label>
+                <input type="text" class="form-control" id="model" placeholder="Vložte model" name="model"
+                       @if (shoe != null)
+                       {
+                           <text> value="@shoe.Model" </text>
+                       } />
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="size" class="form-label">Velikost bot</label>
+                <input type="text" class="form-control" id="size" placeholder="Vložte velikost" name="size"
+                       @if (shoe != null)
+                       {
+                           <text> value="@shoe.Size" </text>
+                       } />
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="yearmodel" class="form-label">Rok modelu bot</label>
+                <input type="text" class="form-control" id="yearmodel" placeholder="Vložte název" name="yearmodel"
+                       @if (shoe != null)
+                       {
+                           <text> value="@shoe.YearModel" </text>
+                       } />
+            </div>
+            <input type="hidden" name="id" value="@shoe?.Id" />
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary"
+                       @if (shoe != null)
+                       {
+                           <text> value="Aktualizovat botu" </text>
+                       }
+                       else
+                       {
+                           <text> value="Přidat botu" </text>
+                       } />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "Seznam bot";
+    var shoes = ViewData["Shoes"] as List<Shoe>;
+}
+
+@* 
+
+Šablona pro výpis filmů z databáze.
+
+Pro správnou syntaxi: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0
+Tohle je pouze kousek kódu podstránky. Šablona rozšiřuje rozvržení stránky v Views/Shared/_Layout.cshtml
+
+ *@
+
+<h1 class="cerveny-text">Seznam bot</h1>
+<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table text-center align-middle">
+                <tr>
+                    <th>ID</th>
+                    <th>Pic</th>
+                    <th>Značka</th>
+                    <th>Model</th>
+                    <th>Velikost</th>
+                    <th>Rok modelu</th>
+                </tr>
+                @* Foreach cyklus pro vypsání všech filmů, které jsme našli v databázi. *@
+                @if (shoes != null)
+                {
+                    
+                foreach (Shoe shoe in shoes)
+                    {
+                        <tr>
+                            <!-- Přístup k jednotlivým property třídy Movie -->
+                            <td>@shoe.Id</td>
+                            <td>
+                                <img src="/upload/@shoe.Photo" alt="PIC: @shoe.Id" class="img-thumbnail" style="width: 150px; height: auto" />
+                            </td>
+                            <td>@shoe.Brand</td>
+                            <td>@shoe.Model</td>
+                            <td>@shoe.Size</td>
+                            <td>@shoe.YearModel</td>
+                            <td>
+                                <div class="mb-3">
+                                    <a asp-controller="Shoe" asp-action="Edit" asp-route-id="@shoe.Id">
+                                        <button class="btn btn-xs btn-warning">Editovat botu</button>
+                                    </a>
+                                </div>
+                                <div class="mb-3">
+                                    <a asp-controller="Shoe" asp-action="Delete" asp-route-id="@shoe.Id">
+                                        <button class="btn btn-xs btn-danger">Smazat botu</button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
